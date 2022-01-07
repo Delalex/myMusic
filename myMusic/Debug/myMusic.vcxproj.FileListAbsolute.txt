@@ -1,0 +1,4 @@
+C:\Users\Delalex\Desktop\Учеба\ТП\myMusic\Debug\myMusic.vcxproj.AssemblyReference.cache
+C:\Users\Delalex\Desktop\Учеба\ТП\myMusic\Debug\myMusic.MainScreen.resources
+C:\Users\Delalex\Desktop\Учеба\ТП\myMusic\Debug\myMusic.vcxproj.GenerateResource.cache
+C:\Users\Delalex\Desktop\Учеба\ТП\myMusic\Debug\myMusic.exe
