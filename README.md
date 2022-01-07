@@ -1,3 +1,3 @@
 # myMusic
-myMusic - course project.
+myMusic - course project.                   
 v1.0 - Ready UI
