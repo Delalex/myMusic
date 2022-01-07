@@ -39,11 +39,16 @@ namespace CppCLRWinformsProjekt {
 
 	private: System::Windows::Forms::Button^ search_song;
 	private: System::Windows::Forms::Button^ search_artist;
-	private: System::Windows::Forms::TreeView^ treeView1;
+	private: System::Windows::Forms::TreeView^ database;
+
 	private: System::Windows::Forms::TextBox^ add_artist;
 	private: System::Windows::Forms::TextBox^ add_song_name;
 	private: System::Windows::Forms::TextBox^ search_by_name;
 	private: System::Windows::Forms::TextBox^ search_by_artist;
+	private: System::Windows::Forms::Button^ button_delete;
+	private: System::Windows::Forms::Button^ button_delete_all;
+
+
 
 
 	protected:
@@ -66,11 +71,13 @@ namespace CppCLRWinformsProjekt {
 			this->btn_add = (gcnew System::Windows::Forms::Button());
 			this->search_song = (gcnew System::Windows::Forms::Button());
 			this->search_artist = (gcnew System::Windows::Forms::Button());
-			this->treeView1 = (gcnew System::Windows::Forms::TreeView());
+			this->database = (gcnew System::Windows::Forms::TreeView());
 			this->add_artist = (gcnew System::Windows::Forms::TextBox());
 			this->add_song_name = (gcnew System::Windows::Forms::TextBox());
 			this->search_by_name = (gcnew System::Windows::Forms::TextBox());
 			this->search_by_artist = (gcnew System::Windows::Forms::TextBox());
+			this->button_delete = (gcnew System::Windows::Forms::Button());
+			this->button_delete_all = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// btn_add
@@ -103,12 +110,13 @@ namespace CppCLRWinformsProjekt {
 			this->search_artist->UseVisualStyleBackColor = true;
 			this->search_artist->Click += gcnew System::EventHandler(this, &Form1::search_artist_Click);
 			// 
-			// treeView1
+			// database
 			// 
-			this->treeView1->Location = System::Drawing::Point(13, 132);
-			this->treeView1->Name = L"treeView1";
-			this->treeView1->Size = System::Drawing::Size(880, 282);
-			this->treeView1->TabIndex = 3;
+			this->database->Location = System::Drawing::Point(13, 132);
+			this->database->Name = L"database";
+			this->database->Size = System::Drawing::Size(880, 282);
+			this->database->TabIndex = 3;
+			this->database->AfterSelect += gcnew System::Windows::Forms::TreeViewEventHandler(this, &Form1::database_AfterSelect);
 			// 
 			// add_artist
 			// 
@@ -126,9 +134,9 @@ namespace CppCLRWinformsProjekt {
 			// 
 			this->add_song_name->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->add_song_name->Location = System::Drawing::Point(547, 14);
+			this->add_song_name->Location = System::Drawing::Point(558, 14);
 			this->add_song_name->Name = L"add_song_name";
-			this->add_song_name->Size = System::Drawing::Size(354, 29);
+			this->add_song_name->Size = System::Drawing::Size(343, 29);
 			this->add_song_name->TabIndex = 5;
 			this->add_song_name->Text = L"SONG NAME";
 			this->add_song_name->Enter += gcnew System::EventHandler(this, &Form1::add_song_name_Enter);
@@ -158,6 +166,26 @@ namespace CppCLRWinformsProjekt {
 			this->search_by_artist->Enter += gcnew System::EventHandler(this, &Form1::search_by_artist_Enter);
 			this->search_by_artist->Leave += gcnew System::EventHandler(this, &Form1::search_by_artist_Leave);
 			// 
+			// button_delete
+			// 
+			this->button_delete->Location = System::Drawing::Point(558, 86);
+			this->button_delete->Name = L"button_delete";
+			this->button_delete->Size = System::Drawing::Size(335, 30);
+			this->button_delete->TabIndex = 8;
+			this->button_delete->Text = L"Delete selected";
+			this->button_delete->UseVisualStyleBackColor = true;
+			this->button_delete->Click += gcnew System::EventHandler(this, &Form1::button_delete_Click);
+			// 
+			// button_delete_all
+			// 
+			this->button_delete_all->Location = System::Drawing::Point(558, 48);
+			this->button_delete_all->Name = L"button_delete_all";
+			this->button_delete_all->Size = System::Drawing::Size(335, 30);
+			this->button_delete_all->TabIndex = 9;
+			this->button_delete_all->Text = L"Delete all";
+			this->button_delete_all->UseVisualStyleBackColor = true;
+			this->button_delete_all->Click += gcnew System::EventHandler(this, &Form1::button_delete_all_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 21);
@@ -165,11 +193,13 @@ namespace CppCLRWinformsProjekt {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->ClientSize = System::Drawing::Size(905, 428);
+			this->Controls->Add(this->button_delete_all);
+			this->Controls->Add(this->button_delete);
 			this->Controls->Add(this->search_by_artist);
 			this->Controls->Add(this->search_by_name);
 			this->Controls->Add(this->add_song_name);
 			this->Controls->Add(this->add_artist);
-			this->Controls->Add(this->treeView1);
+			this->Controls->Add(this->database);
 			this->Controls->Add(this->search_artist);
 			this->Controls->Add(this->search_song);
 			this->Controls->Add(this->btn_add);
@@ -179,6 +209,8 @@ namespace CppCLRWinformsProjekt {
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"Form1";
 			this->Text = L"myMusic";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
@@ -187,16 +219,32 @@ namespace CppCLRWinformsProjekt {
 
 		}
 #pragma endregion
+
+
+	int	NodePicked = 0; //выбран ли узел 
+
+
+	// ---------------------onStart---------------------
 	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) 
 	{
+
 	}
+
+	// ---------------------ADD ARTIST/SONG---------------------
 	private: System::Void btn_add_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		if (add_artist->Text != "ARTIST" && add_song_name->Text != "SONG NAME")
+		{
+			TreeNode^ artist = gcnew TreeNode(add_artist->Text); // добавление артиста
+			database->Nodes->Add(artist);
+			TreeNode^ song = gcnew TreeNode(add_song_name->Text); // добавление трека
+			artist->Nodes->Add(song);
+		}
 		add_artist->Text = "ARTIST";
 		add_song_name->Text = "SONG NAME";
 	}
 
-	// HINTS FOR SONG ADDER
+	// ---------------------HINTS FOR SONG ADDER---------------------
 	private: System::Void add_artist_Enter(System::Object^ sender, System::EventArgs^ e) 
 	{
 		add_artist->Text = "";
@@ -216,7 +264,7 @@ namespace CppCLRWinformsProjekt {
 			add_song_name->Text = "SONG NAME";
 	}
 	
-	// HINTS FOR SEARCH BY SONG NAME
+	// ---------------------HINTS FOR SEARCH BY SONG NAME---------------------
 	private: System::Void search_by_name_Enter(System::Object^ sender, System::EventArgs^ e) 
 	{
 		search_by_name->Text = "";
@@ -231,7 +279,7 @@ namespace CppCLRWinformsProjekt {
 		search_by_name->Text = "SONG NAME";
 	}
 
-	// HINTS FOR SEARCH BY ARTIST
+	// ---------------------HINTS FOR SEARCH BY ARTIST---------------------
 	private: System::Void search_artist_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		search_by_artist->Text = "ARTIST";
@@ -244,6 +292,24 @@ namespace CppCLRWinformsProjekt {
 	{
 		if (search_by_artist->TextLength < 1)
 			search_by_artist->Text = "ARTIST";
+	}
+	
+	// ---------------------DELETE BUTTONS---------------------
+	private: System::Void button_delete_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		if (NodePicked == 1) // Check is node selected, it causes errors if no check !
+		{
+			database->Nodes->Remove(database->SelectedNode);
+			NodePicked = 0;
+		}
+	}
+	private: System::Void button_delete_all_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		database->Nodes->Clear(); //Очистка базы данных
+	}
+	private: System::Void database_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) 
+	{
+		NodePicked = 1; // Node was picked
 	}
 };
 }
